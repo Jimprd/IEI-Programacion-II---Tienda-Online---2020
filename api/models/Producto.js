@@ -12,7 +12,7 @@ const mongoose = require("mongoose");
 const productoSchema = new mongoose.Schema({
   codigoArticulo: {
     type: String,
-    required: false,
+    required: [false, "Ingrese el código del artículo"],
     unique: false,
     trim: true
   },
@@ -29,7 +29,7 @@ const productoSchema = new mongoose.Schema({
   precio: {
     type: Number,
     trim: true,
-    required: [true, 'Debe ingresar el valor del producto']
+    required: [true, 'Debe ingresar el precio del producto']
   },
   stock: {
     type: Number,
@@ -48,13 +48,12 @@ const productoSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
-
 /**
  * Convertimos el Schema en MODEL:
  * es una class con la que construimos documents. En este caso, cada document será
  * un "producto" con las propiedades y comportamientos declarados en nuestro Schema.
  *
- * 1º param: nombre de la collection en la db. Es CASE-SENSITIVE, por convencion siempre es en minúscula
+ * 1º param: nombre de la collection en la db. Es CASE-SENSITIVE, por convención se suele usar siempre es en minúscula
  * 2º param: es el Schema de la colletion
  */
 
@@ -67,3 +66,15 @@ module.exports = productoModel;
  * If a collection does not exist, MongoDB creates the collection when you first store data for
  * that collection.
  */
+
+
+ /**
+  * Querys
+  *  
+  * Vista todos los productos:
+  * const parametros = {_id: 1, nombre: 1, precio: 1};
+  * db.productos.find({}).select(parametros);
+  * 
+  * Vista de Producto
+  * db.productos.find(); 
+  */
