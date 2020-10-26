@@ -3,17 +3,11 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // https://medium.com/@simonhoyos/enrutando-en-react-cd9e4ad6e3d3
 
 
-// ES6 Modules or TypeScript
-import Swal from "sweetalert2";
-
-// CommonJS
-// const Swal = require('sweetalert2')
-// https://github.com/sweetalert2/sweetalert2-react-content
-
 //IMPORTANDO MIS COMPONENTES
 import Home from "./components/Home";
 import Productos from "./components/Productos";
 import Producto from "./components/Producto";
+import ProductoNuevo from "./components/Producto_nuevo";
 import Login from "./components/Login";
 
 /**
@@ -23,12 +17,13 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/productos">
-          <Productos />
+        <Route path="/productos" component={Productos} exact>
         </Route>
 
-        <Route path="/producto/_id/:_id" component={Producto} >
-        </Route>        
+        <Route path="/producto-nuevo" component={ProductoNuevo} exact>
+        </Route>
+
+        <Route path="/producto/_id/:_id" component={Producto} exact></Route>        
 
         <Route path="/login">
           <Login />

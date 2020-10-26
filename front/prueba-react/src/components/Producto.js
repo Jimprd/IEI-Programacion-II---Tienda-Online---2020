@@ -56,7 +56,7 @@ export default class Producto extends Component {
        */
       <div>
         <Menu />
-        PAGINA DEL PRODUCTO
+       <h1> PAGINA DEL PRODUCTO </h1>
         <div key={this.state.producto._id}>
           <div>
             {this.state.producto.nombre} - ${this.state.producto.precio} -{" "}
