@@ -4,7 +4,7 @@ function index(req, res){
 
   usuarioModel.find({})
   .then(usuarios => {
-    if(usuarios.length) return res.status(200).send({usuarios} || { message: 'Muestra Todos Los Usuarios'});
+    if(usuarios.length) return res.status(200).send({ message: 'Muestra Todos Los Usuarios', usuarios});
     return res.status(204).send({ message: 'No se encontraron usuarios' });
   })
   .catch((error => res.status(500).send({error})));
@@ -18,9 +18,10 @@ function show(req, res){
 }
 
 function create(req, res){
+  console.info("REQUEST", req.body)
  let usuario = new usuarioModel(req.body);
  usuario.save()
- .then((usuario) => res.status(200).send({usuario}))
+ .then((usuario) => res.status(201).send({message: "La cuenta se creó correctamente.", usuario}))
  .catch((error) => res.status(500).send({error}));
 }
 

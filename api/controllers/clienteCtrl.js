@@ -3,7 +3,7 @@ const Model = require('../models/Clientes');
 function index(req, res){
  Model.find({})
  .then(clientes => {
-  if(clientes.length) return res.status(200).send({clientes});
+  if(clientes.length) return res.status(200).send({message: "hola", clientes});
   return res.status(204).send({message: 'No se encontraron Clientes'})
  })
  .catch((error => res.status(500).send({error})));
@@ -17,11 +17,9 @@ function show(req, res){
 }
 
 function create(req, res){
-console.info(`Antes del modelo:\n ${req.body}`);
 let cliente = new Model(req.body);
-console.info(`Después del modelo:\n ${cliente}`);
 cliente.save()
-.then((cliente) => res.status(200).send({cliente}))
+.then((cliente) => res.status(201).send({message: "Tu cuenta se creó correctamente.", cliente}))
 .catch((error) => res.status(500).send({error}));
 }
 

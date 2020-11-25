@@ -4,6 +4,7 @@ const parametros = {
   _id: 1,
   nombre: 1,
   precio: 1,
+  stock: 1,
 };
 
 // .find({}).select('_id -precio') // otro formato, excluye precio
@@ -13,11 +14,12 @@ function index(req, res) {
     .find({})
     .select(parametros)
     .then((products) => {
-      if (products.length)
+      if (products.length) {
         return res
           .status(200)
-          .send({ products } || { message: "Mostrando Todos Los Productos" });
-      return res.status(204).send({ message: "No se encontraron productos" });
+          .send({ message: "Mostrando Todos Los Productos", products });
+      }
+      return res.status(204).send("No se encontraron productos. El 204 no envia un cuerpo de respuesta.");
     })
     .catch((error) => res.status(500).send({ error }));
 }
@@ -55,15 +57,14 @@ function update(req, res) {
   product
     .save()
     .then((product) =>
-      res.status(200).send({ message: "Se Actualizó: ", product })
+      res.status(200).send({ message: "Se Actualizó correctamente", product })
     )
     .catch((error) => res.status(500).send({ error }));
 }
 
 function remove(req, res) {
   if (req.body.error) return res.status(500).send({ error });
-  if (!req.body.products)
-    return res.status(404).send({ message: "Producto No Encontrado" });
+  if (!req.body.products) return res.status(404).send({ message: "Producto No Encontrado" });
   req.body.products[0]
     .remove()
     .then((product) => res.status(200).send({ message: "Se Eliminó", product }))
@@ -74,6 +75,7 @@ function remove(req, res) {
 function buscar(req, res, next) {
   let query = {};
   query[req.params.clave] = req.params.valor;
+  console.info("Query buscar", query)
   productoModel
     .find(query)
     .then((products) => {
