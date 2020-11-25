@@ -12,9 +12,9 @@ const mongoose = require("mongoose");
 const productoSchema = new mongoose.Schema({
   codigoArticulo: {
     type: String,
+    trim: true,
     required: [false, "Ingrese el código del artículo"],
     unique: false,
-    trim: true
   },
   nombre: {
     type: String,
@@ -33,16 +33,17 @@ const productoSchema = new mongoose.Schema({
   },
   stock: {
     type: Number,
+    trim: true,
     default: 10,
     min: 0,
-    trim: true
   },
   categoria: {
-    String,
+    type: String,
   },
   foto: {
-    String,
+   type: String,
   },
+  
   date: {
     type: Date,
     default: Date.now(),
@@ -57,7 +58,7 @@ const productoSchema = new mongoose.Schema({
  * 2º param: es el Schema de la colletion
  */
 
-const productoModel = mongoose.model("producto", productoSchema); // IMPORTANTE mongoose.model
+const productoModel = mongoose.model("productos", productoSchema); // IMPORTANTE mongoose.model
 
 // Exportamos el modelo para poder utilizarlo desde el CONTROLADOR
 module.exports = productoModel;

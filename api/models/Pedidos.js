@@ -4,19 +4,25 @@ const pedidoSchema = new mongoose.Schema({
   cliente: {
     type: mongoose.Schema.ObjectId,
     ref: "clientes",
+    nombre: String,
+    apellido: String,
   },
-  pedido: [
+  items: [
     {
       producto: {
         type: mongoose.Schema.ObjectId,
         ref: "productos",
+        nombre: String,
+        precio: Number
       },
       cantidad: Number,
-    },
+      subtotal: Number,
+    }
   ],
-  total: {
+  costoTotal: {
     type: Number,
   },
+  tipoEntrega: ["Retiro del local.","Acordar con el vendedor."],
   date: {
     type: Date,
     default: Date.now(),
