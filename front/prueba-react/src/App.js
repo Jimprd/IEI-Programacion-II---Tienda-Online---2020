@@ -2,12 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 // https://medium.com/@simonhoyos/enrutando-en-react-cd9e4ad6e3d3
 
-
 //IMPORTANDO MIS COMPONENTES
-import Home from "./components/Home";
-import Productos from "./components/Productos";
-import Producto from "./components/Producto";
-import ProductoNuevo from "./components/Producto_nuevo";
+import Home from "./components/pages/Home/Home";
+import Productos from "./components/pages/Producto/Productos";
+import Producto from "./components/pages/Producto/Producto";
+import ProductoNuevo from "./components/pages/Producto/Producto_nuevo";
 import Login from "./components/Login";
 
 /**
@@ -17,21 +16,17 @@ export default function App() {
   return (
     <Router>
       <Switch>
-        <Route path="/productos" component={Productos} exact>
-        </Route>
+        <Route path="/productos" component={Productos} exact></Route>
 
-        <Route path="/producto-nuevo" component={ProductoNuevo} exact>
-        </Route>
+        <Route path="/producto-nuevo" component={ProductoNuevo} exact></Route>
 
-        <Route path="/producto/_id/:_id" component={Producto} exact></Route>        
+        <Route path="/producto/_id/:_id" component={Producto} exact></Route>
 
         <Route path="/login">
           <Login />
         </Route>
 
-        <Route path="/" exact>
-          <Home />
-        </Route>
+        <Route path="/" component={Home} exact></Route>
       </Switch>
     </Router>
   );
