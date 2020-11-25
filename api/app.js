@@ -5,19 +5,22 @@ const [express, bodyParser, morgan, cors, config] = [
   require("cors"),
   require("./config/configuracion"),
 ];
+
 /**
  * BASE DE DATOS
- * Al fichero de base de datos solo necesitamos requerirlo para que esté disponible en la aplicación
- * No hace falta asignarla a una variable, ya que no utilizaremos ningún método o función desde app.js.
  */
 require("./databases/mongodb");
 
-const [rtsProducto, rtsUsuario, rtsCliente, rtsRoot, rtsPedido] = [
+/**
+ * IMPORTAR ROUTERS
+ */
+const [rtsProducto, rtsCategoria, rtsUsuario, rtsCliente, rtsPedido, rtsRoot] = [
   require("./routes/producto"),
-  require("./routes/usuario"),
-  require("./routes/cliente"),
-  require("./routes/saludar"),
+  require("./routes/categorias"),
+  require("./routes/usuarios"),
+  require("./routes/clientes"),
   require("./routes/pedidos"),
+  require("./routes/saludar"),
   // const routes = require('./routes/routes')
 ];
 
@@ -26,8 +29,6 @@ const app = express();
 
 /**
  * MIDDLEWARES
- * morgan mide tiempos de respuestas get post, etc y realiza logs en terminal
- * bodyParser.json() es el encargado de que una petición POST coloque los parámetros en req.params o nos facilite los archivos de haberlos.
  */
 app.use([
   morgan("dev"),
@@ -46,10 +47,12 @@ app.use([
  */
 app.use("/", rtsRoot);
 app.use("/producto", rtsProducto);
-app.use("/usuario", rtsUsuario);
-app.use("/cliente", rtsCliente);
+app.use("/categorias", rtsCategoria);
+app.use("/usuarios", rtsUsuario);
+app.use("/clientes", rtsCliente);
 app.use("/pedidos", rtsPedido);
 // app.use(routes);
+
 
 /**
  * SERVER
