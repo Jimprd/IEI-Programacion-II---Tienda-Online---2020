@@ -1,0 +1,17 @@
+.textColor{
+    color: #f2711c !important;
+}
+
+#lateral{
+    /* max-height: 100% !important; */
+    /* min-height: 100% !important; */
+    /* height: calc(100% - 40px) !important; */
+    height: 100% !important;
+    margin-left: -50px;
+    /* background-color: red !important; */
+}
+
+#contenido{
+    height: 100% !important;
+    background-color:whitesmoke !important;
+}
